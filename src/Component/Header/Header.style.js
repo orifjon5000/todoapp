@@ -3,7 +3,7 @@ import { COLORS } from "../../constants/Index";
 import { pxToRem } from "../../utils";
 
 export const StyledHeader = styled.header`
-  /* padding: ${pxToRem(5)}; */
+padding: 0 ${pxToRem(16)};
   background-color: ${COLORS.main};
   display: flex;
   justify-content: space-between;
@@ -16,7 +16,6 @@ export const StyledHeader = styled.header`
   }
 
   h5 {
-    /* padding:${pxToRem(32)}; */
     margin-left: ${pxToRem(10)};
     font-weight: 400;
     cursor: pointer;
@@ -25,32 +24,35 @@ export const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: ${pxToRem(12)};
 
     button {
-      background-color: red;
+      background-color: transparent;
       display: flex;
       align-items: center;
+      justify-content: center;
       background: transparent;
       border: none;
       position: relative;
       height: 100%;
+      width: ${pxToRem(40)};
+      cursor: pointer;
 
       &:hover {
         background: ${COLORS.darkblue};
       }
-      .header-notification > span {
+       span {
         background: ${COLORS.darkblue};
-        width: ${pxToRem(20)};
         color: #fff;
-        font-size: ${pxToRem(14)};
+        font-size: ${pxToRem(11)};
         display: flex;
         align-items: center;
         justify-content: center;
-        height: ${pxToRem(20)};
+        width: ${pxToRem(16)};
+        height: ${pxToRem(16)};
         border-radius: 50%;
         position: absolute;
-        top: ${pxToRem(-5)};
+        top: ${pxToRem(2)};
+        right: ${pxToRem(2)};
       }
     }
   }
@@ -59,8 +61,9 @@ export const StyledHeader = styled.header`
     width: 100%;
     max-width: ${pxToRem(400)};
     margin: 0 ${pxToRem(10)};
-    border: none;
     input {
+      border: none;
+      outline: none;
       width: 100%;
       height: ${pxToRem(32)};
       border-radius: ${pxToRem(4)};
