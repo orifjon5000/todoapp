@@ -1,5 +1,6 @@
 import {createGlobalStyle} from "styled-components";
 import { COLORS, STYLING_CONFIGS } from "../constants/Index";
+import { pxToRem } from "../utils";
 export default createGlobalStyle`
 *, *::after, *::before{
     box-sizing: border-box;
@@ -9,7 +10,8 @@ export default createGlobalStyle`
     font-family: 'Source Sans Pro', 'Open sans', Arial,sans-serif;
 }
 body{
-    background-color: ${COLORS.lightGrey};
+    background-color: #fff ;
+    color: ${COLORS.black};
 }
 
 `

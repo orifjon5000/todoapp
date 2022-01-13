@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "../../constants/Index";
+import { COLORS,STYLING_CONFIGS } from "../../constants/Index";
 import { pxToRem } from "../../utils";
 
 export const StyledHeader = styled.header`
@@ -8,7 +8,8 @@ padding: 0 ${pxToRem(16)};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: ${pxToRem(48)}; //48
+  height: ${pxToRem(STYLING_CONFIGS.HEADER_HEIGHT)}; //48
+  color:#fff; 
 
   .grid-wrapper {
     display: flex;
