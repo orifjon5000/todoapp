@@ -8,7 +8,7 @@ export const StyledSidebar = styled.aside`
   width: ${pxToRem(STYLING_CONFIGS.SIDEBAR_WIDTH)};
   display: flex;
   flex-direction: column;
-  padding: ${pxToRem(20)};
+  /* padding: ${pxToRem(20)}; */
   border-right: ${pxToRem(1)} solid ${COLORS.iconGrey};
   .menu-list {
     display: flex;
@@ -16,6 +16,27 @@ export const StyledSidebar = styled.aside`
     margin-top: ${pxToRem(20)};
     margin-bottom: auto;
   }
+
+  .footer-menu {
+    margin: 0;
+    flex-direction: row;
+    border-top: ${pxToRem(1)} solid ${COLORS.iconGrey};
+    justify-content: space-between;
+    span {
+      display: none;
+    }
+    .menu-list {
+      height: ${pxToRem(48)};
+      width: auto;
+    }
+    a.active {
+      background-color: transparent;
+    }
+    a.active::after {
+      content: unset;
+    }
+  }
+
   .menu-list-item {
     /* margin-bottom: ${pxToRem(25)}; */
     padding: ${pxToRem(20)};
@@ -32,6 +53,21 @@ export const StyledSidebar = styled.aside`
 
     span {
       margin-left: ${pxToRem(5)};
+    }
+    &.active {
+      background-color: ${COLORS.iconGrey};
+      position: relative;
+      color: ${COLORS.blue};
+      font-weight: 500;
+    }
+    &::after {
+      content: "";
+      width: 7px;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: ${COLORS.blue};
     }
   }
 `;
