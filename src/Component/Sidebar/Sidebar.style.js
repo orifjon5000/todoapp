@@ -31,6 +31,7 @@ export const StyledSidebar = styled.aside`
     }
     a.active {
       background-color: transparent;
+      color:${COLORS.black}
     }
     a.active::after {
       content: unset;

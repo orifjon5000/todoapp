@@ -1,9 +1,11 @@
 import React from 'react'
+import AddTodo from '../AddToDo/AddToDo'
+import { StyledMain } from './Main.style'
 
 export default function Main() {
     return (
-        <div>
-            
-        </div>
+        <StyledMain>
+            <AddTodo/>
+        </StyledMain>
     )
 }
