@@ -1,96 +1,96 @@
-import React from "react";
-import { VscMenu } from "react-icons/vsc";
-import { pxToRem } from "../../utils/index";
-import { BsSun, BsStar } from "react-icons/bs";
-import { IoHomeOutline } from "react-icons/io5";
-import { AiOutlineUser } from "react-icons/ai";
-import { VscCalendar } from "react-icons/vsc";
-import { NavLink } from "react-router-dom";
-import { StyledSidebar } from "./Sidebar.style.js";
+import React from 'react'
+import { NavLink } from 'react-router-dom';
+import { VscMenu, VscCalendar } from 'react-icons/vsc';
+import { BsStar, BsSun } from 'react-icons/bs';
+import { IoHomeOutline } from 'react-icons/io5';
+import { AiOutlineUser } from 'react-icons/ai';
+import { pxToRem } from '../../utils';
+import { StyledSidebar } from './Sidebar.style'
+
 const MENU_LIST = [
   {
-    title: "My DAY",
-    path: "/my-day",
-    icon: <BsSun />,
+    title: 'My Day',
+    path: '/my-day',
+    icon: <BsSun />
   },
   {
-    title: "Important",
-    path: "/Important",
-    icon: <BsStar />,
+    title: 'Important',
+    path: '/important',
+    icon: <BsStar />
   },
   {
-    title: "Planned",
-    path: "/Planned",
-    icon: <VscCalendar />,
+    title: 'Planned',
+    path: '/planned',
+    icon: <VscCalendar />
   },
   {
-    title: "Assigned to me",
-    path: "/Assigned-to-me",
-    icon: <AiOutlineUser />,
+    title: 'Assigned to me',
+    path: '/assigned-to-me',
+    icon: <AiOutlineUser />
   },
   {
-    title: "Tasks",
-    path: "/Tasks",
-    icon: <IoHomeOutline />,
+    title: 'Tasks',
+    path: '/tasks',
+    icon: <IoHomeOutline />
   },
-];
+]
 const FOOTER_MENU_LIST = [
   {
-    title: "My DAY",
-    path: "/my-day",
-    icon: <BsSun />,
+    title: 'My Day',
+    path: '#/my-day',
+    icon: <BsSun />
   },
   {
-    title: "Important",
-    path: "/Important",
-    icon: <BsStar />,
+    title: 'Important',
+    path: '#/important',
+    icon: <BsStar />
   },
   {
-    title: "Planned",
-    path: "/Planned",
-    icon: <VscCalendar />,
+    title: 'Planned',
+    path: '#/planned',
+    icon: <VscCalendar />
   },
   {
-    title: "Assigned to me",
-    path: "/Assigned-to-me",
-    icon: <AiOutlineUser />,
+    title: 'Assigned to me',
+    path: '#/assigned-to-me',
+    icon: <AiOutlineUser />
   },
   {
-    title: "Tasks",
-    path: "/Tasks",
-    icon: <IoHomeOutline />,
+    title: 'Tasks',
+    path: '#/tasks',
+    icon: <IoHomeOutline />
   },
-];
-
+]
 export default function Sidebar() {
   return (
     <StyledSidebar>
       <div>
-        <button>
-          {" "}
-          <VscMenu size={pxToRem(24)} color="#fff" />
-        </button>
+        <button><VscMenu size={pxToRem(24)} color='#fff' /> </button>
       </div>
-      <div className="menu-list">
-        {MENU_LIST.map((item) => {
-          return (
-            <NavLink to={item.path} className="menu-list-item" key={item.title}>
-              {item.icon}
-              <span>{item.title}</span>
-            </NavLink>
-          );
-        })}
+      <div className='menu-list'>
+        {
+          MENU_LIST.map(item => {
+            return (
+              <NavLink to={item.path} className="menu-list-item" key={item.title}>
+                {item.icon}
+                <span>{item.title}</span>
+              </NavLink>
+            )
+          })
+        }
       </div>
-      <div className="menu-list footer-menu">
-        {FOOTER_MENU_LIST.map((item) => {
-          return (
-            <NavLink to={item.path} className="menu-list-item" key={item.title}>
-              {item.icon}
-              <span>{item.title}</span>
-            </NavLink>
-          );
-        })}
+      <div className='menu-list footer-menu'>
+        {
+          FOOTER_MENU_LIST.map(item => {
+            return (
+              <NavLink to={item.path} className="menu-list-item" key={item.title}>
+                {item.icon}
+                <span>{item.title}</span>
+              </NavLink>
+            )
+          })
+        }
       </div>
     </StyledSidebar>
-  );
+  )
 }

@@ -30,8 +30,8 @@ export const StyledSidebar = styled.aside`
       width: auto;
     }
     a.active {
+      color:${COLORS.black};
       background-color: transparent;
-      color:${COLORS.black}
     }
     a.active::after {
       content: unset;

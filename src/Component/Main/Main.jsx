@@ -1,11 +1,14 @@
 import React from 'react'
-import AddTodo from '../AddToDo/AddToDo'
+import{Routes,Route} from 'react-router-dom'
 import { StyledMain } from './Main.style'
+import ToDos from '../ToDos/ToDos'
 
 export default function Main() {
     return (
         <StyledMain>
-            <AddTodo/>
+            <Routes>
+                <Route path="/:name" element={<ToDos/>}/>
+            </Routes>
         </StyledMain>
     )
 }
