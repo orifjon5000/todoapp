@@ -1,36 +1,47 @@
-import React from "react";
-import { StyledTodos } from "./ToDos.style";
-import { useLocation, useParams } from "react-router-dom";
-import AddTodo from "../AddToDo/AddToDo";
-import Mockdata from '../../Mocks/todos.js'
-import ToDoItems from "./ToDoItems";
-import { findRenderedComponentWithType } from "react-dom/cjs/react-dom-test-utils.production.min";
-impor axios from '../../utils/axios.js'
+import React from 'react';
+import { StyledTodos } from './ToDos.style';
+import AddTodo from '../AddToDo';
+import axios from '../../utils/axios';
+
+import ToDoItems from './ToDoItems';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 export default function ToDos() {
-  const location = useLocation();
-  const params = useParams();
+  const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const fetchTodos=async()=>{
-    try{
-const data=axios
-    }
-    catch(error){
-
+  const fetchTodos = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get('/todos');
+      const { data: todosa, meta: { pagination } } = data;
+      setTodos(todosa);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      // setLoading(false);
     }
   }
 
+  useEffect(() => {
+    fetchTodos();
+  }, [])
+  console.log(todos)
+
   return (
     <StyledTodos>
-      <h2>Too name</h2>
-      <AddTodo/>
+      <h2>Todo name</h2>
       {
-        Mockdata.map((item)=>{
-          return(
-            <ToDoItems key={item.id} data={item}  />
-          )
+        loading ? 'Loading...' : <AddTodo />
+      }
+
+      {
+        todos.map((item) => {
+          const { id, attributes } = item;
+          return <ToDoItems key={id} data={{ ...attributes, id }} />
         })
       }
     </StyledTodos>
-  );
+  )
 }

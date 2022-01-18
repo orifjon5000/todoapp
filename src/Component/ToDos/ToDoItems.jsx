@@ -1,22 +1,56 @@
-import React from "react";
-import { BsStar } from "react-icons/bs";
-import { StyledTodosItem } from "./ToDos.style";
-function ToDoItems(props) {
- const {title, due_date,is_completed,collection_id, content, category,is_important}=props.data
-    return (
-    <StyledTodosItem className="todo-item">
-      <div><input type="checkbox" /></div>
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { BsStar, BsStarFill } from 'react-icons/bs';
+import axios from '../../utils/axios';
+import { StyledTodoItem } from './ToDos.style'
+export default function ToDoItem(props) {
+  const { title, id, is_important, is_completed, collection_id, category, content, due_date } = props.data;
+  const [isImportant, setIsImportant] = useState(is_important);
+  const [isCompleted, setIsCompleted] = useState(is_completed);
+
+  useEffect(() => {
+    if (isImportant !== is_important) {
+      handleImportant();
+    }
+  }, [isImportant]);
+
+  useEffect(() => {
+    if (isCompleted !== is_completed) {
+      handleCompleted()
+    }
+  }, [isCompleted]);
+
+  const handleCompleted = async () => {
+    try {
+      const { data } = await axios.put(`/todos/${id}`, { data: { is_completed: !is_completed } });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const handleImportant = async () => {
+    try {
+      const { data } = await axios.put(`/todos/${id}`, { data: { is_important: !is_important } });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  return (
+    <StyledTodoItem className="todo-item">
       <div>
-        <h4> {title}1</h4>
+        <input type="checkbox" onChange={() => setIsCompleted(!is_completed)} checked={isCompleted} />
+      </div>
+      <div className='todo-item__details'>
+        <h4>{title}</h4>
         <p>{content}</p>
-        <div className="todo-item_details">
-        <span>{category}2</span>
-        <span>{due_date}3aa</span>
+        <div >
+          <span>{category}</span>
+          <span>{due_date}</span>
         </div>
       </div>
-      <div><BsStar/></div>
-    </StyledTodosItem>
-  );
+      <button onClick={() => setIsImportant(!is_important)}> {isImportant ? <BsStarFill /> : <BsStar />} </button>
+    </StyledTodoItem>
+  )
 }
-
-export default ToDoItems;

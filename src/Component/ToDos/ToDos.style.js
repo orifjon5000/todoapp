@@ -4,7 +4,7 @@ import { pxToRem } from "../../utils";
 
 export const StyledTodos = styled.div``;
 
-export const StyledTodosItem = styled.div`
+export const StyledTodoItem = styled.div`
   display: flex;
   align-items: center;
   border: ${pxToRem(1)} solid ${COLORS.iconGrey};
