@@ -8,11 +8,12 @@ export const COLORS = {
   activeItem: "#f4f6ff",
   lightGrey: "#f6f6f6",
   iconGrey: "#dddddd",
-  black:'#34373d'
+  black: "#34373d",
 };
 
-export const STYLING_CONFIGS={
-    ROOT_SIZE:16,
-    HEADER_HEIGHT:48,
-    SIDEBAR_WIDTH:280
-}
+export const STYLING_CONFIGS = {
+  ROOT_SIZE: 16,
+  HEADER_HEIGHT: 48,
+  SIDEBAR_WIDTH: 280,
+  BORDER_RADIUS: 6,
+};

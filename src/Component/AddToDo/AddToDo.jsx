@@ -30,6 +30,7 @@ export default function AddToDo() {
       const { data } = await axios.post('/todos', { data: todo });
       console.log(data);
       setLoading(false);
+
     } catch (error) {
       console.log(error)
       setLoading(false);
