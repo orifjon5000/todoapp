@@ -2,16 +2,17 @@ import React from 'react'
 import { StyledAddToDo } from './AddToDo.style.js';
 import axios from '../../utils/axios';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
-export default function AddToDo() {
+export default function AddToDo({ fetchTodos, addNewTodo, hideInput }) {
   const [loading, setLoading] = useState(false);
   const [todo, setTodo] = useState({
     title: '',
     content: '',
-    due_date: '',
+    due_date: new Date().toISOString(),
     is_important: false,
     is_completed: false,
-    category: '',
+    category: 'todo',
     collection_id: null,
   });
 
@@ -25,12 +26,20 @@ export default function AddToDo() {
   };
 
   const handleSubmit = async () => {
+    const { title } = todo;
     try {
+      if (title.length) {
       setLoading(true);
       const { data } = await axios.post('/todos', { data: todo });
-      console.log(data);
+      addNewTodo(data.data);
       setLoading(false);
-
+      return hideInput();
+    }
+    Swal.fire({
+      icon: 'error',
+      text: 'Title is missing'
+    })
+      
     } catch (error) {
       console.log(error)
       setLoading(false);
@@ -41,6 +50,7 @@ export default function AddToDo() {
 
   return (
     <StyledAddToDo>
+      <button onClick={hideInput}>Close</button>
       <p>
         <label htmlFor="title">Title</label>
         <input

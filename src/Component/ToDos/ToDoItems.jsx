@@ -1,11 +1,15 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { BsStar, BsStarFill } from 'react-icons/bs';
+
+import { useEffect,useState } from 'react';
+import { BsStar, BsStarFill,BsTrash } from 'react-icons/bs';
 import axios from '../../utils/axios';
 import { StyledTodoItem } from './ToDos.style'
-export default function ToDoItem(props) {
-  const { title, id, is_important, is_completed, collection_id, category, content, due_date } = props.data;
+import Swal from 'sweetalert2';
+
+
+
+export default function ToDoItem({ fetchTodos, data, handleRemoveTodo }) {
+  const { title, id, is_important, is_completed, collection_id, category, content, due_date } = data;
   const [isImportant, setIsImportant] = useState(is_important);
   const [isCompleted, setIsCompleted] = useState(is_completed);
 
@@ -36,6 +40,27 @@ export default function ToDoItem(props) {
       console.log(error)
     }
   };
+  const handleRemove = async () => {
+    try {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Are you sure to delete this todo?',
+        showCancelButton: true
+      }).then(async ({ isConfirmed }) => {
+        if (isConfirmed) {
+          const { data } = await axios.delete(`/todos/${id}`);
+          console.log(data);
+          // fetchTodos()
+          handleRemoveTodo(id);
+        }
+      })
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        text: JSON.stringify(error.response.data?.error?.message)
+      })
+    }
+  }
 
   return (
     <StyledTodoItem className="todo-item">
@@ -50,6 +75,8 @@ export default function ToDoItem(props) {
           <span>{due_date}</span>
         </div>
       </div>
+      <button onClick={handleRemove}> <BsTrash /> </button>
+
       <button onClick={() => setIsImportant(!is_important)}> {isImportant ? <BsStarFill /> : <BsStar />} </button>
     </StyledTodoItem>
   )

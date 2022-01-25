@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import Header from "../Component/Header";
-import Main from "../Component/Main";
-import Sidebar from "../Component/Sidebar";
+import React, { lazy, useState, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 import { StyledMainContenWrapper } from "./App.style";
-import { Route,Routes } from "react-router-dom";
-import Welcome from "./Welcome/Welcome";
-import SignIn from "./Auth/SignIn";
-import SignUp from "./Auth/SignUp";
+
+const Header = lazy(() => import("../Component/Header"));
+const Main = lazy(() => import("../Component/Main"));
+const Sidebar = lazy(() => import("../Component/Sidebar"));
+const Welcome = lazy(() => import("./Welcome/Welcome"));
+const SignIn = lazy(() => import("./Auth/SignIn"));
+const SignUp = lazy(() => import("./Auth/SignUp"));
 
 export default function App() {
   const [isRed, setIsRed] = useState(false);
-  const [isLogged, setIsLogged] = useState(false );
+  const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState({
     id: null,
     username: "",
@@ -18,6 +19,7 @@ export default function App() {
   });
   if (isLogged) {
     return (
+      <Suspense fallback="Loading..." >
       <div>
         <Header />
         <StyledMainContenWrapper>
@@ -25,15 +27,19 @@ export default function App() {
           <Main />
         </StyledMainContenWrapper>
       </div>
-    )
-  }return(
- <>
-  {/* <Welcome/> */}
-  <Routes>
-    <Route path="/sign-in" element={<SignIn/>}/>
-    <Route path="/sign-up" element={<SignUp/>}/>
-    <Route path="/" element={<Welcome/>}/>
-  </Routes>
- </>
-    )
+      </Suspense>
+    );
+  }
+  return (
+    <>
+      <Suspense fallback="Loading...">
+      
+      <Routes>
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/" element={<Welcome />} />
+      </Routes>
+      </Suspense>
+    </>
+  );
 }
