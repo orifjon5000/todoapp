@@ -1,5 +1,6 @@
 import React, { lazy, useState, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import AppContext from "../Context/AppContext";
 import { StyledMainContenWrapper } from "./App.style";
 
 const Header = lazy(() => import("../Component/Header"));
@@ -10,16 +11,24 @@ const SignIn = lazy(() => import("./Auth/SignIn"));
 const SignUp = lazy(() => import("./Auth/SignUp"));
 
 export default function App() {
-  const [isRed, setIsRed] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState({
-    id: null,
-    username: "",
-    email: "",
-  });
-  if (isLogged) {
+  const [user, setUser] = useState(()=>JSON.parse(localStorage.user||"{}"));
+  const token=localStorage.token;
+  
+  const signOut = ()=>{
+    try{
+      setUser({});
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }catch(error){
+      console.log(error);
+      
+    }
+  }
+
+  if (token && user?.id) {
     return (
-      <Suspense fallback="Loading..." >
+      <AppContext.Provider value= {{user,token,signOut}}>
+        <Suspense fallback="Loading..." >
       <div>
         <Header />
         <StyledMainContenWrapper>
@@ -28,6 +37,7 @@ export default function App() {
         </StyledMainContenWrapper>
       </div>
       </Suspense>
+      </AppContext.Provider>
     );
   }
   return (
