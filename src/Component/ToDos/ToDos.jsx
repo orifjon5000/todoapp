@@ -53,8 +53,9 @@ export default function ToDos() {
           hideInput={() => setShowInput(false)}
         />
       ) : (
-        <button onClick={() => setShowInput(true)}>+ Todo</button>
+        <button className="addTodo" onClick={() => setShowInput(true)}>+ Todo</button>
       )}
+      
       {/* <Loader loading={loading} /> */}
 
       {todos.map((item) => {

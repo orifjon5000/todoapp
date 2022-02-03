@@ -52,7 +52,7 @@ export default function AddToDo({ fetchTodos, addNewTodo, hideInput }) {
     <StyledAddToDo>
       <button onClick={hideInput}>Close</button>
       <p>
-        <label htmlFor="title">Title</label>
+        {/* <label htmlFor="title">title</label> */}
         <input
           type="text"
           name='title'
@@ -61,7 +61,7 @@ export default function AddToDo({ fetchTodos, addNewTodo, hideInput }) {
           onChange={handleInputChange}
         />
       </p>
-      <p>
+      {/* <p>
         <label htmlFor="content">Description</label>
         <textarea
           name='content'
@@ -69,14 +69,14 @@ export default function AddToDo({ fetchTodos, addNewTodo, hideInput }) {
           placeholder='Details'
           onChange={handleInputChange}
         />
-      </p>
+      </p> */}
       <p>
-        <label htmlFor="due-date">Date</label>
+        {/* <label htmlFor="due-date">Date</label> */}
         <input
           type='date'
           name='due_date'
           value={due_date}
-          placeholder='Date'
+          // placeholder='Date'
           onChange={handleInputChange}
         />
       </p>
